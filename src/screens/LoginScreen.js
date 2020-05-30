@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Alert, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontiscoIcon from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import {Button, Text, Input} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import Colors from '../constants/Colors';
@@ -18,7 +20,7 @@ function LoginScreen() {
         try {
             let response = await auth().signInWithEmailAndPassword(email, password);
             console.log('user', response.user);
-            if (response.user){
+            if (response.user) {
                 navigation.navigate('main');
             }
         } catch (err) {
@@ -28,57 +30,78 @@ function LoginScreen() {
 
     return (
         <View style={styles.screenContainer}>
-            <Text style={styles.title}> Iniciar Sesión </Text>
+            <View style={styles.logoContainer}>
 
-            <Input
-                placeholder='Usuario'
-                leftIcon={
-                    <Icon
-                        name='user'
-                        size={24}
-                        color='black'
-                    />
-                }
-                onChangeText={value => setEmail(value)}
-                containerStyle={styles.emailInputContainer}
-            />
-            <Input
-                placeholder='Contraseña'
-                leftIcon={
-                    <Icon
-                        name='user'
-                        size={24}
-                        color='black'
-                    />
-                }
-                onChangeText={value => setPassword(value)}
-                containerStyle={styles.passwordInputContainer}
-            />
-            <Button title={'CONTINUAR'} onPress={tryLogin} containerStyle={styles.continueButon}/>
+            </View>
+            <View style={styles.loginContainer}>
+                <Text style={styles.title}> Iniciar Sesión </Text>
 
-            <Text
-                style={styles.forgotText}
-                onPress={()=> console.log("FORGOTTTT")}
-            > Olvidé mi contraseña </Text>
+                <Input
+                    // label={"Correo electrónico"}
+                    placeholder={"Correo electrónico"}
+                    leftIcon={
+                        <FontiscoIcon
+                            name='email'
+                            size={24}
+                            color='black'
+                        />
+                    }
+                    onChangeText={value => setEmail(value)}
+                    containerStyle={styles.emailInputContainer}
+                />
+                <Input
+                    // label={"Contraseña"}
+                    placeholder={"Contraseña"}
+                    leftIcon={
 
-            <Text style={styles.continueButton}> ¿Aún no tienes cuenta? Registrate </Text>
+                        <MaterialIcons
+                            name='textbox-password'
+                            size={24}
+                            color='black'
+                        />
+                    }
+                    onChangeText={value => setPassword(value)}
+                    containerStyle={styles.passwordInputContainer}
+                />
+                <Button
+                    title={'CONTINUAR'}
+                    onPress={tryLogin}
+                    buttonStyle={styles.continueButton}
+                    containerStyle={styles.continueContainerButton}
+                />
+
+                <Text
+                    style={styles.forgotText}
+                    onPress={() => console.log('FORGOTTTT')}
+                > Olvidé mi contraseña </Text>
+
+                <Text style={styles.createAccountText}> ¿Aún no tienes cuenta? Registrate </Text>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     screenContainer: {
-        display: 'flex',
+        // backgroundColor: Colors.dark,
+        flex: 1,
+    },
+    logoContainer: {
+        flex: 1,
+        // backgroundColor: Colors.dark,
+    },
+    loginContainer: {
+        // backgroundColor: Colors.light,
+        flex: 2,
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        marginTop: RFValue(200, 680),
         marginRight: RFValue(32, 680),
         marginLeft: RFValue(32, 680),
     },
     title: {
         color: Colors.secondary,
+        fontWeight: 'bold',
         fontSize: RFValue(32, 680),
-        marginBottom: RFValue(32, 680),
+        marginVertical: RFValue(32, 680),
     },
     emailInputContainer: {
         backgroundColor: Colors.white,
@@ -91,18 +114,24 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
     },
+    continueContainerButton: {
+        alignSelf: 'stretch',
+        marginTop: RFValue(28, 680),
+        // width: 100%,
+    },
     continueButton: {
         backgroundColor: Colors.primary,
-        marginTop: RFValue(28, 680),
+        height: RFValue(46, 680),
+        borderRadius: 25,
     },
-    forgotText:{
+    forgotText: {
         textDecorationLine: 'underline',
         color: Colors.secondary,
         fontSize: 13,
         alignSelf: 'flex-end',
         marginTop: RFValue(28, 680),
     },
-    createAccountText:{
+    createAccountText: {
         textDecorationLine: 'underline',
         color: Colors.primary,
         fontSize: 14,
