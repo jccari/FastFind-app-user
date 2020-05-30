@@ -26,7 +26,7 @@ export function AppNavigation() {
     return (
         <NavigationContainer>
             <NavAppStack.Navigator
-                initialRouteName="login"
+                initialRouteName="main"
                 screenOptions={{
                     headerShown: false,
                 }}
