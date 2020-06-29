@@ -14,7 +14,7 @@ export default function CategoryListScreen() {
 
     useEffect( () => {
         async function getCategories() {
-            let categoryList = await firestore().collection('category').get()
+            let categoryList = await firestore().collection('category').orderBy("order", "asc").get()
                 .then(snapshot => {
                     return snapshot.docs.map( doc => ({
                         id: doc.id,

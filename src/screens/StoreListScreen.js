@@ -1,23 +1,31 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {RFValue} from "react-native-responsive-fontsize";
+import {View, StyleSheet} from 'react-native';
+import Map from '../components/map';
 
 
-export default function StoreListScreeen(){
+export default function StoreListScreeen() {
     return (
         <View style={styles.screenContainer}>
-            <Text> StoreListScreeen </Text>
+            <Map/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     screenContainer: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
     },
-    contentShape: {
-        fontSize: RFValue(15, 680),
+    map: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
     },
 });
