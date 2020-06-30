@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Geolocation from 'react-native-geolocation-service';
 import ProjectConfig from '../constants/Configs';
 import {PermissionsAndroid, Platform} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 export const AppContext = React.createContext();
 
@@ -33,6 +34,7 @@ function AppContextProvider({children}) {
     const [categories, setCategories] = useState([]);
     const [categorySelected, setCategorySelected] = useState(null);
     const [categoryProducts, setCategoryProducts] = useState([]);
+    const [stores, setStores] = useState([]);
 
     //This function get initial user position
     useEffect(() => {
@@ -71,6 +73,49 @@ function AppContextProvider({children}) {
         );
     }
 
+    useEffect(() => {
+        async function getCategories() {
+            let categoryList = await firestore().collection('category').orderBy('order', 'asc').get()
+                .then(snapshot => {
+                    return snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        data: doc.data(),
+                    }));
+                });
+
+            console.log('categories', categoryList);
+            categoryList.length > 1 ? setCategorySelected(categoryList[0]) : setCategorySelected(null);
+            setCategories(categoryList);
+        }
+
+        getCategories();
+    }, []);
+
+    useEffect(() => {
+        async function getStores() {
+            let storeList = await firestore().collection('store').get()
+                .then(snapshot => {
+                    return snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        data: doc.data(),
+                    }));
+                });
+
+            storeList.forEach(store => {
+                // console.log('store.position', store.data.position);
+                store.data.position = {
+                    latitude: store.data.position["_latitude"],
+                    longitude: store.data.position["_longitude"],
+                };
+            });
+
+            // console.log('stores', storeList);
+            setStores(storeList);
+        }
+
+        getStores();
+    }, []);
+
     const contextValues = {
         initialMapRegion,
         currentPosition, setCurrentPosition,
@@ -78,6 +123,7 @@ function AppContextProvider({children}) {
         categories, setCategories,
         categorySelected, setCategorySelected,
         categoryProducts, setCategoryProducts,
+        stores, setStores,
     };
 
     return (
@@ -86,7 +132,7 @@ function AppContextProvider({children}) {
         >
             {children}
         </AppContext.Provider>
-    )
+    );
 }
 
 export default AppContextProvider;

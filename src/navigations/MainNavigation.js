@@ -28,7 +28,7 @@ const TabStackNav = createBottomTabNavigator();
 export default function MainNavigation() {
     return (
         <TabStackNav.Navigator
-            initialRouteName="storeList"
+            initialRouteName="home"
             tabBarOptions={{
                 activeTintColor: Colors.primary,
                 inactiveTintColor: Colors.secondary,
