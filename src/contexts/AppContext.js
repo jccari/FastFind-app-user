@@ -55,7 +55,7 @@ function AppContextProvider({children}) {
     function getCurrentLocation() {
         Geolocation.getCurrentPosition(
             position => {
-                // console.log("position", position.coords.latitude, position.coords.longitude);
+                console.log("position Initial", position.coords.latitude, position.coords.longitude);
                 let newPosition = {
                     latitude: parseFloat(position.coords.latitude),
                     longitude: parseFloat(position.coords.longitude),

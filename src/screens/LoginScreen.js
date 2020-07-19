@@ -13,19 +13,33 @@ import {useNavigation} from '@react-navigation/native';
 function LoginScreen() {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    const [errorText, setErrorText] = useState(null);
     const navigation = useNavigation();
 
     async function tryLogin() {
-        console.log('Trying login with: ', email, password);
-        try {
-            let response = await auth().signInWithEmailAndPassword(email, password);
-            console.log('user', response.user);
-            if (response.user) {
-                navigation.navigate('main');
-            }
-        } catch (err) {
-            Alert('Datos de Autenticación erroneas. Intente de nuevo');
+        setErrorText(null);
+        if (email.length === 0 || password.length === 0){
+            setErrorText("Por favor ingrese sus datos.")
         }
+        console.log('Trying login with: ', email, password);
+        auth().signInWithEmailAndPassword(email, password)
+            .then( response => {
+                navigation.navigate('main');
+            })
+            .catch( err => {
+                Alert('Datos de Autenticación erroneas. Intente de nuevo');
+                console.log("Datos de Autenticación erroneas. Intente de nuevo");
+                setErrorText("Datos de Autenticación erroneas. POr favor intente de nuevo.")
+            });
+        // try {
+        //     let response = await auth().signInWithEmailAndPassword(email, password);
+        //     console.log('user', response.user);
+        //     if (response.user) {
+        //         navigation.navigate('main');
+        //     }
+        // } catch (err) {
+        //     Alert('Datos de Autenticación erroneas. Intente de nuevo');
+        // }
     }
 
     return (
@@ -48,6 +62,7 @@ function LoginScreen() {
                     }
                     onChangeText={value => setEmail(value)}
                     containerStyle={styles.emailInputContainer}
+                    inputStyle={{fontSize: 16, paddingLeft: 7,}}
                 />
                 <Input
                     // label={"Contraseña"}
@@ -60,8 +75,10 @@ function LoginScreen() {
                             color='black'
                         />
                     }
+                    secureTextEntry={true}
                     onChangeText={value => setPassword(value)}
                     containerStyle={styles.passwordInputContainer}
+                    inputStyle={{fontSize: 16, paddingLeft: 7,}}
                 />
                 <Button
                     title={'CONTINUAR'}
@@ -69,6 +86,9 @@ function LoginScreen() {
                     buttonStyle={styles.continueButton}
                     containerStyle={styles.continueContainerButton}
                 />
+
+                {/*{ errorText && <Text style={styles.errorText}> errorText </Text> }*/}
+
 
                 <Text
                     style={styles.forgotText}
@@ -123,6 +143,9 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         height: RFValue(46, 680),
         borderRadius: 25,
+    },
+    errorText:{
+        color: Colors.warning
     },
     forgotText: {
         textDecorationLine: 'underline',
