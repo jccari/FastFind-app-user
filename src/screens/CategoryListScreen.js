@@ -12,23 +12,23 @@ import CategoryList from '../components/category/CategoryList';
 export default function CategoryListScreen() {
     const {categories, setCategories, categoryProducts, setCategorySelected} = useContext(AppContext);
 
-    useEffect( () => {
-        async function getCategories() {
-            let categoryList = await firestore().collection('category').get()
-                .then(snapshot => {
-                    return snapshot.docs.map( doc => ({
-                        id: doc.id,
-                        data: doc.data(),
-                    }));
-                });
-
-            console.log("categories", categoryList);
-            categoryList.length > 1 ? setCategorySelected( categoryList[0]) : setCategorySelected(null);
-            setCategories(categoryList);
-        }
-
-        getCategories();
-    }, []);
+    // useEffect( () => {
+    //     async function getCategories() {
+    //         let categoryList = await firestore().collection('category').orderBy("order", "asc").get()
+    //             .then(snapshot => {
+    //                 return snapshot.docs.map( doc => ({
+    //                     id: doc.id,
+    //                     data: doc.data(),
+    //                 }));
+    //             });
+    //
+    //         console.log("categories", categoryList);
+    //         categoryList.length > 1 ? setCategorySelected( categoryList[0]) : setCategorySelected(null);
+    //         setCategories(categoryList);
+    //     }
+    //
+    //     getCategories();
+    // }, []);
 
     return (
         <View style={styles.screenContainer}>
