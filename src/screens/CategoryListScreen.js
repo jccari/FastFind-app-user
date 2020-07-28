@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
     },
     categoryContainer:{
         // backgroundColor: "#cecece",
-        width: wp(35),
+        width: wp(50),
     },
     categoryProductsContainer:{
         // backgroundColor: "#b4b4b4",
-        width: wp(65),
+        width: wp(50),
 
     }
 });
