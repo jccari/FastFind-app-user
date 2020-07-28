@@ -12,48 +12,30 @@ import CategoryList from '../components/category/CategoryList';
 export default function CategoryListScreen() {
     const {categories, setCategories, categoryProducts, setCategorySelected} = useContext(AppContext);
 
-    // useEffect( () => {
-    //     async function getCategories() {
-    //         let categoryList = await firestore().collection('category').orderBy("order", "asc").get()
-    //             .then(snapshot => {
-    //                 return snapshot.docs.map( doc => ({
-    //                     id: doc.id,
-    //                     data: doc.data(),
-    //                 }));
-    //             });
-    //
-    //         console.log("categories", categoryList);
-    //         categoryList.length > 1 ? setCategorySelected( categoryList[0]) : setCategorySelected(null);
-    //         setCategories(categoryList);
-    //     }
-    //
-    //     getCategories();
-    // }, []);
-
     return (
         <View style={styles.screenContainer}>
             <View style={styles.titleContainer}>
                 <Text style={styles.textTitle}> Todas las Categorías </Text>
             </View>
 
-            <View style={styles.bodyContainer}>
+            {/*<View>*/}
                 <CategoryList
                     categories={categories}
-                    style={styles.categoryContainer}
+                    // style={styles.categoryContainer}
                 />
 
-                <ProductsList
-                    products={categoryProducts}
-                    style={styles.categoryProductsContainer}
-                />
-            </View>
+                {/*<ProductsList*/}
+                {/*    products={categoryProducts}*/}
+                {/*    style={styles.categoryProductsContainer}*/}
+                {/*/>*/}
+            {/*</View>*/}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     screenContainer: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: Colors.light,
         paddingLeft: RFValue(15, 680),
         paddingRight: RFValue(15, 680),
@@ -68,18 +50,21 @@ const styles = StyleSheet.create({
         fontSize: RFValue(30, 680),
         fontWeight: 'bold',
     },
-    bodyContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        fontSize: RFValue(15, 680),
-    },
-    categoryContainer:{
-        // backgroundColor: "#cecece",
-        width: wp(50),
-    },
-    categoryProductsContainer:{
-        // backgroundColor: "#b4b4b4",
-        width: wp(50),
 
-    }
+    // bodyContainer: {
+    //     // flex: 1,
+    //     flexDirection: 'row',
+    //     // fontSize: RFValue(15, 680),
+    // },
+    // categoryContainer:{
+    //     // flexDirection: 'row',
+    //     flexWrap: 'wrap',
+    //     backgroundColor: "#cecece",
+    //     // width: wp(50),
+    // },
+    // categoryProductsContainer:{
+    //     // backgroundColor: "#b4b4b4",
+    //     width: wp(95),
+    //
+    // }
 });
