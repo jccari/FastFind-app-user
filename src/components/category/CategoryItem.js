@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     categoryImage: {
-        width: 85,
+        width: 180,
         height: 80,
         // backgroundColor: "#FFFFFF"
     },

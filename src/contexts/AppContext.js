@@ -31,6 +31,10 @@ function AppContextProvider({children}) {
     };
     const [currentPosition, setCurrentPosition] = useState({...initialMapRegion});
 
+    const [textSearch, setTextSearch] = useState("");
+
+    const [products, setProducts] = useState(null);
+    const [productSelected, setProductSelected] = useState(null);
     const [categories, setCategories] = useState([]);
     const [categorySelected, setCategorySelected] = useState(null);
     const [categoryProducts, setCategoryProducts] = useState([]);
@@ -120,6 +124,10 @@ function AppContextProvider({children}) {
         initialMapRegion,
         currentPosition, setCurrentPosition,
 
+        textSearch, setTextSearch,
+
+        products, setProducts,
+        productSelected, setProductSelected,
         categories, setCategories,
         categorySelected, setCategorySelected,
         categoryProducts, setCategoryProducts,

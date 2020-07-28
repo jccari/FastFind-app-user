@@ -9,4 +9,8 @@ export default {
         latitudeDelta: 0.03,
         longitudeDelta: 0.03,
     },
+    margins: {
+        horizontal: 15,
+        vertical: 10,
+    }
 };
