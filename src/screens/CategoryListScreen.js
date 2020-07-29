@@ -2,58 +2,30 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import firestore from '@react-native-firebase/firestore';
 import Colors from '../constants/Colors';
 import {AppContext} from '../contexts/AppContext';
-import ProductsList from '../components/category/ProductsList';
 import CategoryList from '../components/category/CategoryList';
 
 
 export default function CategoryListScreen() {
-    const {categories, setCategories, categoryProducts, setCategorySelected} = useContext(AppContext);
-
-    // useEffect( () => {
-    //     async function getCategories() {
-    //         let categoryList = await firestore().collection('category').orderBy("order", "asc").get()
-    //             .then(snapshot => {
-    //                 return snapshot.docs.map( doc => ({
-    //                     id: doc.id,
-    //                     data: doc.data(),
-    //                 }));
-    //             });
-    //
-    //         console.log("categories", categoryList);
-    //         categoryList.length > 1 ? setCategorySelected( categoryList[0]) : setCategorySelected(null);
-    //         setCategories(categoryList);
-    //     }
-    //
-    //     getCategories();
-    // }, []);
-
+    const {categories} = useContext(AppContext);
     return (
         <View style={styles.screenContainer}>
             <View style={styles.titleContainer}>
                 <Text style={styles.textTitle}> Todas las Categorías </Text>
             </View>
 
-            <View style={styles.bodyContainer}>
-                <CategoryList
-                    categories={categories}
-                    style={styles.categoryContainer}
-                />
-
-                <ProductsList
-                    products={categoryProducts}
-                    style={styles.categoryProductsContainer}
-                />
-            </View>
+            <CategoryList
+                categories={categories}
+                // style={styles.categoryContainer}
+            />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     screenContainer: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: Colors.light,
         paddingLeft: RFValue(15, 680),
         paddingRight: RFValue(15, 680),
@@ -68,18 +40,21 @@ const styles = StyleSheet.create({
         fontSize: RFValue(30, 680),
         fontWeight: 'bold',
     },
-    bodyContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        fontSize: RFValue(15, 680),
-    },
-    categoryContainer:{
-        // backgroundColor: "#cecece",
-        width: wp(50),
-    },
-    categoryProductsContainer:{
-        // backgroundColor: "#b4b4b4",
-        width: wp(50),
 
-    }
+    // bodyContainer: {
+    //     // flex: 1,
+    //     flexDirection: 'row',
+    //     // fontSize: RFValue(15, 680),
+    // },
+    // categoryContainer:{
+    //     // flexDirection: 'row',
+    //     flexWrap: 'wrap',
+    //     backgroundColor: "#cecece",
+    //     // width: wp(50),
+    // },
+    // categoryProductsContainer:{
+    //     // backgroundColor: "#b4b4b4",
+    //     width: wp(95),
+    //
+    // }
 });

@@ -1,6 +1,8 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import CategoryItem from './CategoryItem';
+import Colors from '../../constants/Colors';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 function CategoryList({categories, style}) {
@@ -10,8 +12,8 @@ function CategoryList({categories, style}) {
     }
 
     return (
-        <ScrollView style={[style]}>
-            {/*<View>*/}
+        <ScrollView >
+            <View style={styles.container}>
                 {
                     categories.map( category => (
                         <CategoryItem
@@ -20,15 +22,20 @@ function CategoryList({categories, style}) {
                         />
                     ))
                 }
-            {/*</View>*/}
+            </View>
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
+        // flex: 1,
+        flexDirection: "row",
+        // justifyContent: "flex-start",
         // backgroundColor: Colors.dark,
-        width: 110,
+        // width: 110,
+        flexWrap: "wrap",
+        height:hp(80),
     }
 });
 

@@ -20,6 +20,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import CategoryListScreen from '../screens/CategoryListScreen';
 import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import StoreListScreeen from '../screens/StoreListScreen';
+import {CategoryNavigation} from './CategoryNavigation';
 
 //// define a stack to contain all screens or grouped screens
 const TabStackNav = createBottomTabNavigator();
@@ -28,7 +29,7 @@ const TabStackNav = createBottomTabNavigator();
 export default function MainNavigation() {
     return (
         <TabStackNav.Navigator
-            initialRouteName="home"
+            initialRouteName="categoryNav"
             tabBarOptions={{
                 activeTintColor: Colors.primary,
                 inactiveTintColor: Colors.secondary,
@@ -47,10 +48,10 @@ export default function MainNavigation() {
                 }}
             />
             <TabStackNav.Screen
-                name="categoryList"
-                component={CategoryListScreen}
+                name="categoryNav"
+                component={CategoryNavigation}
                 options={{
-                    title: 'categoryList',
+                    title: 'categoryNav',
                     tabBarLabel: 'Categorias',
                     tabBarIcon: ({color, size}) => (
                         <Icon name="list-ul" type="font-awesome" size={size} color={color} />
@@ -79,17 +80,17 @@ export default function MainNavigation() {
                     ),
                 }}
             />
-            <TabStackNav.Screen
-                name="profile"
-                component={ProfileScreen}
-                options={{
-                    title: 'perfil',
-                    tabBarLabel: 'Perfil',
-                    tabBarIcon: ({color, size}) => (
-                        <Icon name="user" type="font-awesome" size={size} color={color} />
-                    ),
-                }}
-            />
+            {/*<TabStackNav.Screen*/}
+            {/*    name="profile"*/}
+            {/*    component={ProfileScreen}*/}
+            {/*    options={{*/}
+            {/*        title: 'perfil',*/}
+            {/*        tabBarLabel: 'Perfil',*/}
+            {/*        tabBarIcon: ({color, size}) => (*/}
+            {/*            <Icon name="user" type="font-awesome" size={size} color={color} />*/}
+            {/*        ),*/}
+            {/*    }}*/}
+            {/*/>*/}
         </TabStackNav.Navigator>
     );
 }

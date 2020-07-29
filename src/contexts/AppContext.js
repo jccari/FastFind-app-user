@@ -40,6 +40,8 @@ function AppContextProvider({children}) {
     const [categoryProducts, setCategoryProducts] = useState([]);
     const [stores, setStores] = useState([]);
 
+    const [productCategory, setProductCategory] = useState(null);
+
     //This function get initial user position
     useEffect(() => {
         requestPermissions();
@@ -132,6 +134,8 @@ function AppContextProvider({children}) {
         categorySelected, setCategorySelected,
         categoryProducts, setCategoryProducts,
         stores, setStores,
+
+        productCategory, setProductCategory,
     };
 
     return (
