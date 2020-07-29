@@ -2,33 +2,23 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import firestore from '@react-native-firebase/firestore';
 import Colors from '../constants/Colors';
 import {AppContext} from '../contexts/AppContext';
-import ProductsList from '../components/category/ProductsList';
 import CategoryList from '../components/category/CategoryList';
 
 
 export default function CategoryListScreen() {
-    const {categories, setCategories, categoryProducts, setCategorySelected} = useContext(AppContext);
-
+    const {categories} = useContext(AppContext);
     return (
         <View style={styles.screenContainer}>
             <View style={styles.titleContainer}>
                 <Text style={styles.textTitle}> Todas las Categorías </Text>
             </View>
 
-            {/*<View>*/}
-                <CategoryList
-                    categories={categories}
-                    // style={styles.categoryContainer}
-                />
-
-                {/*<ProductsList*/}
-                {/*    products={categoryProducts}*/}
-                {/*    style={styles.categoryProductsContainer}*/}
-                {/*/>*/}
-            {/*</View>*/}
+            <CategoryList
+                categories={categories}
+                // style={styles.categoryContainer}
+            />
         </View>
     );
 }

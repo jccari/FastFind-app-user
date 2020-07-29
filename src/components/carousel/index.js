@@ -21,7 +21,7 @@ export default function Carousel() {
       >
           {
               products && products.map( item => (
-                  <View style={styles.productContainer}>
+                  <View style={styles.productContainer} key={item.id}>
                       <Image
                           source={item['imageUri'] && {uri: item['imageUri']}}
                           style={{width: 100, height: 100}}
