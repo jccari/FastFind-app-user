@@ -5,16 +5,20 @@ import { SearchBar } from 'react-native-elements';
 import {AppContext} from '../../contexts/AppContext';
 import Colors from '../../constants/Colors';
 
-export default function SearchEngine({items, setItems}) {
-    const {textSearch, setTextSearch, setCategoryProducts, categoryProducts} = useContext(AppContext);
+export default function SearchEngine({items, setItems, allItems}) {
+    const {textSearch, setTextSearch} = useContext(AppContext);
 
     const onChangeTextSearch = function (search) {
         setTextSearch(search);
-        setItems( items.filter((item)=> item["data"]["name"].toLowerCase().includes(search.toLowerCase())) );
+        if (search !== ""){
+            setItems( items.filter((item)=> item["data"]["name"].toLowerCase().includes(search.toLowerCase())) );
+        } else {
+            setItems(allItems);
+        }
     };
 
     const onClearSearch = function () {
-        setItems(categoryProducts);
+        setItems(allItems);
     };
 
     return (

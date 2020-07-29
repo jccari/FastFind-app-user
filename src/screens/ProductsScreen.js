@@ -37,6 +37,7 @@ export default function ProductScreen() {
                 <SearchEngine
                     items={allItems}
                     setItems={setAllItems}
+                    allItems={categoryProducts}
                 />
             </View>
             {/*<Divider style={{ backgroundColor: 'blue' }} />;*/}
