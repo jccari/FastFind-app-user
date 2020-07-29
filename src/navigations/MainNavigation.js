@@ -21,6 +21,7 @@ import CategoryListScreen from '../screens/CategoryListScreen';
 import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import StoreListScreeen from '../screens/StoreListScreen';
 import {CategoryNavigation} from './CategoryNavigation';
+import {ShoppingCartNavigation} from './ShoppingCartNavigation';
 
 //// define a stack to contain all screens or grouped screens
 const TabStackNav = createBottomTabNavigator();
@@ -29,7 +30,7 @@ const TabStackNav = createBottomTabNavigator();
 export default function MainNavigation() {
     return (
         <TabStackNav.Navigator
-            initialRouteName="categoryNav"
+            initialRouteName="shoppingCartNav"
             tabBarOptions={{
                 activeTintColor: Colors.primary,
                 inactiveTintColor: Colors.secondary,
@@ -59,8 +60,8 @@ export default function MainNavigation() {
                 }}
             />
             <TabStackNav.Screen
-                name="shoppingCart"
-                component={ShoppingCartScreen}
+                name="shoppingCartNav"
+                component={ShoppingCartNavigation}
                 options={{
                     title: 'shoppingCart',
                     tabBarLabel: 'Carrito',

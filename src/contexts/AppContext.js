@@ -41,6 +41,7 @@ function AppContextProvider({children}) {
     const [stores, setStores] = useState([]);
 
     const [productCategory, setProductCategory] = useState(null);
+    const [shoppingCart, setShoppingCart] = useState([]);
 
     //This function get initial user position
     useEffect(() => {
@@ -136,6 +137,7 @@ function AppContextProvider({children}) {
         stores, setStores,
 
         productCategory, setProductCategory,
+        shoppingCart, setShoppingCart,
     };
 
     return (
