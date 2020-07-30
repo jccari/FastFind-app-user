@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
 import {useRecommended} from '../../hooks';
@@ -17,9 +17,9 @@ export default function Recommended() {
           {
               recommended &&
                   recommended.map(item => (
-                      <View style={styles.subtitleStyle}>
+                      <TouchableOpacity style={styles.subtitleStyle}>
                           <Text>{item.name}</Text>
-                      </View>
+                      </TouchableOpacity>
                   ))
           }
       </View>
