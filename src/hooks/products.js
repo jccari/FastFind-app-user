@@ -17,7 +17,13 @@ export default function useProducts() {
                 console.error("Error on get products", error);
             });
 
-        // console.info("products" ,tmp);
+        // tmp.forEach( item => {
+        //     let tmp2 = item["price"];
+        //     tmp2.toFixed(2);
+        //     item["price"] = tmp2;
+        // });
+
+        console.info("products" ,tmp);
         setProducts(tmp);
         return tmp;
     };

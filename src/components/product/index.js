@@ -1,13 +1,29 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import Colors from '../../constants/Colors';
-import {Image, Text} from 'react-native-elements';
+import {Icon, Image, Text} from 'react-native-elements';
+import {AppContext} from '../../contexts/AppContext';
 
 export default function Product({item}) {
+    const {shoppingCart, setShoppingCart} = useContext(AppContext);
+
+    function addToShoppingCart() {
+        // console.log("add", item);
+        item = {...item, quantity: 1 };
+        setShoppingCart(shoppingCart.concat(item));
+    }
 
     return (
         <View style={styles.productContainer}>
+            <Icon
+                name='add-circle'
+                type='ionicon'
+                color={Colors.primary}
+                size={45}
+                onPress={addToShoppingCart}
+                containerStyle={{position: "absolute", top: -6 , right: 0}}
+            />
             <Image
                 source={item['imageUri'] && {uri: item['imageUri']}}
                 style={{width: 100, height: 100}}

@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {useProducts} from '../../hooks';
-import {Image, Text} from 'react-native-elements';
+import {Icon, Image, Text} from 'react-native-elements';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Colors from '../../constants/Colors';
 import Configs from '../../constants/Configs';
+import {AppContext} from '../../contexts/AppContext';
 
 export default function Carousel() {
     const {products} = useProducts();
+    const {shoppingCart, setShoppingCart} = useContext(AppContext);
     // console.info("products3", products);
+
+    function addToShoppingCart(item) {
+        // console.log("add", item);
+        item = {...item, quantity: 1 };
+        setShoppingCart(shoppingCart.concat(item));
+    }
 
     if (products === null)
         return;
@@ -26,6 +34,14 @@ export default function Carousel() {
                           source={item['imageUri'] && {uri: item['imageUri']}}
                           style={{width: 100, height: 100}}
                           PlaceholderContent={<ActivityIndicator/>}
+                      />
+                      <Icon
+                          name='add-circle'
+                          type='ionicon'
+                          color={Colors.primary}
+                          size={45}
+                          onPress={() => addToShoppingCart(item)}
+                          containerStyle={{position: "absolute", top: -6 , right: 0}}
                       />
                       <Text>{item.name}</Text>
                       <Text>{`S/ ${item.price}`}</Text>
